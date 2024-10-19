@@ -1,0 +1,21 @@
+---
+- name: Run commands on frontend server
+  hosts: fe_server
+  gather_facts: false  
+
+  tasks:
+    - name: Go to indigo fe directory and pull latest code 
+      command: chdir=/home/divyammathur/indigo_paints_web_fe git pull
+      register: command_output
+
+    - name: Display git pull output
+      debug:
+        var: command_output.stdout_lines
+  
+    - name: Go to indigo fe directory and run docker build
+      command: chdir=/home/divyammathur/indigo_paints_web_fe sudo docker-compose up -d --build
+      register: docker_output
+
+    - name: Display docker build output
+      debug:
+        var: docker_output.stdout_lines

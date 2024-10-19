@@ -1,0 +1,11 @@
+version: "3.4"
+services:
+  indigofrontend:
+    image: indigo-frontend
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: indigo-frontend
+    ports:
+      - 5007:80
